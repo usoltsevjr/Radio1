@@ -5,20 +5,70 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
+
     @Test
-    public void shouldNextRadiostation1() {
-        Radio radio = new Radio();
-        radio.setCurrentRadiostationNumber(5);
+    public void shouldGetRadiostationNumberMax() {
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
+
+        assertEquals(15, radio.getRadiostationNumberMax());
+    }
+
+    @Test
+    public void shouldGetCurrentRadiostation() {
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
+
+        assertEquals(5, radio.getCurrentRadiostationNumber());
+    }
+
+    @Test
+    public void shouldGetVolumeMax() {
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
+        assertEquals(100, radio.getVolumeMax());
+    }
+
+    @Test
+    public void shouldGetCurrentVolume() {
+        Radio radio = new Radio(
+                15,
+                5,
+                40,
+                true);
+        assertEquals(40, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldNextRadiostation() {
+        Radio radio = new Radio(
+                15,
+                7,
+                50,
+                true);
         radio.nextRadiostation();
 
-        assertEquals(6, radio.getCurrentRadiostationNumber());
+        assertEquals(8, radio.getCurrentRadiostationNumber());
 
     }
 
     @Test
     public void shouldNextRadiostation2() {
-        Radio radio = new Radio();
-        radio.setCurrentRadiostationNumber(9);
+        Radio radio = new Radio(
+                15,
+                15,
+                50,
+                true);
+
         radio.nextRadiostation();
 
         assertEquals(0, radio.getCurrentRadiostationNumber());
@@ -27,17 +77,25 @@ class RadioTest {
 
     @Test
     public void shouldNextRadiostation3() {
-        Radio radio = new Radio();
-        radio.setCurrentRadiostationNumber(11);
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
+        radio.setCurrentRadiostationNumber(20);
         radio.nextRadiostation();
 
-        assertEquals(9, radio.getCurrentRadiostationNumber());
+        assertEquals(15, radio.getCurrentRadiostationNumber());
 
     }
 
     @Test
     public void shouldNextRadiostation4() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
         radio.setCurrentRadiostationNumber(-1);
         radio.nextRadiostation();
 
@@ -47,38 +105,53 @@ class RadioTest {
 
 
     @Test
-    public void shouldPrevRadiostation1() {
-        Radio radio = new Radio();
-        radio.setCurrentRadiostationNumber(5);
+    public void shouldPrevRadiostation() {
+        Radio radio = new Radio(
+                15,
+                8,
+                50,
+                true);
         radio.prevRadiostation();
 
-        assertEquals(4, radio.getCurrentRadiostationNumber());
+        assertEquals(7, radio.getCurrentRadiostationNumber());
 
     }
 
     @Test
     public void shouldPrevRadiostation2() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(
+                15,
+                10,
+                50,
+                true);
         radio.setCurrentRadiostationNumber(0);
         radio.prevRadiostation();
 
-        assertEquals(9, radio.getCurrentRadiostationNumber());
+        assertEquals(15, radio.getCurrentRadiostationNumber());
 
     }
 
     @Test
     public void shouldPrevRadiostation3() {
-        Radio radio = new Radio();
-        radio.setCurrentRadiostationNumber(11);
+        Radio radio = new Radio(
+                15,
+                5,
+                50,
+                true);
+        radio.setCurrentRadiostationNumber(20);
         radio.prevRadiostation();
 
-        assertEquals(9, radio.getCurrentRadiostationNumber());
+        assertEquals(15, radio.getCurrentRadiostationNumber());
 
     }
 
     @Test
     public void shouldPrevRadiostation4() {
-        Radio radio = new Radio();
+        Radio radio = new Radio(
+                15,
+                7,
+                50,
+                true);
         radio.setCurrentRadiostationNumber(-2);
         radio.prevRadiostation();
 
@@ -87,54 +160,74 @@ class RadioTest {
     }
 
     @Test
-    public void shouldVolumeUp1() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(5);
+    public void shouldVolumeUp() {
+        Radio radio = new Radio(
+                15,
+                7,
+                50,
+                true);
         radio.volumeUp();
 
-        assertEquals(6, radio.getCurrentVolume());
+        assertEquals(51, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldVolumeUp2() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(15);
+        Radio radio = new Radio(
+                15,
+                7,
+                40,
+                true);
+        radio.setCurrentVolume(101);
         radio.volumeUp();
 
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldVolumeUp3() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-2);
+        Radio radio = new Radio(
+                15,
+                7,
+                50,
+                true);
+        radio.setCurrentVolume(-5);
         radio.volumeUp();
 
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldVomumeDown1() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(6);
+    public void shouldVolumeDown() {
+        Radio radio = new Radio(
+                15,
+                7,
+                50,
+                true);
         radio.volumeDown();
 
-        assertEquals(5, radio.getCurrentVolume());
+        assertEquals(49, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldVomumeDown2() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(11);
+    public void shouldVolumeDown2() {
+        Radio radio = new Radio(
+                15,
+                7,
+                111,
+                true);
         radio.volumeDown();
 
-        assertEquals(10, radio.getCurrentVolume());
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldVomumeDown3() {
-        Radio radio = new Radio();
-        radio.setCurrentVolume(-1);
+    public void shouldVolumeDown3() {
+        Radio radio = new Radio(
+                15,
+                7,
+                -5,
+                true);
         radio.volumeDown();
 
         assertEquals(0, radio.getCurrentVolume());
